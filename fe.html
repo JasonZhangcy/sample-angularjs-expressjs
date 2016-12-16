@@ -1,0 +1,34 @@
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+
+
+<body data-ng-app="myApp" data-ng-controller="controller">
+    <form data-ng-submit="func()">
+        <textarea name="inputtext" type="text" ng-model="sentence"></textarea>
+        <button>submit</button>
+    </form>
+a {{test}}
+</body>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('controller', function ($scope, $http) {
+        $scope.test = '445454';
+        $scope.func = function () {
+
+            $scope.jsondata = {
+                "status": "OK",
+                "language": "english",
+                "sentences": [{"sentence": "That's a nice restaurant."}, {"sentence": "Also I went to another bad restaurant."}, {"sentence": "I didn't like that movie."}]
+            };
+
+            $http.post('http://localhost:8888/sample', $scope.jsondata).success(function (data, status) {
+                console.log("Success");
+            })
+        }
+    })
+
+
+</script>
+
+</html>
